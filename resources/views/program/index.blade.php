@@ -2,30 +2,253 @@
 @section('title','Program Donasi — Mari Berbagi')
 @section('styles')
 <style>
-.filter-bar{background:var(--white);padding:1.5rem 5%;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.filter-btn{padding:.45rem 1.1rem;border-radius:50px;border:2px solid var(--border);background:transparent;color:var(--muted);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
-.filter-btn:hover,.filter-btn.active{background:var(--teal);color:var(--white);border-color:var(--teal)}
-.filter-search{flex:1;min-width:200px;padding:.6rem 1rem;border:2px solid var(--border);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s}
-.filter-search:focus{border-color:var(--teal)}
+/* Import Font yang Sederhana, Clean, dan Mudah Dibaca */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-.programs-wrap{padding:2.5rem 5%}
-.programs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem}
-.prog-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:0 2px 16px rgba(13,110,110,.08);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
-.prog-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(13,110,110,.14)}
-.prog-card-img{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--teal-light),rgba(232,98,42,.1));display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative}
-.badge-cat{position:absolute;top:.8rem;left:.8rem;background:var(--white);color:var(--teal);font-size:.68rem;font-weight:700;padding:.25rem .6rem;border-radius:50px;text-transform:uppercase}
-.badge-urgent{position:absolute;top:.8rem;right:.8rem;background:var(--orange);color:var(--white);font-size:.68rem;font-weight:700;padding:.25rem .6rem;border-radius:50px}
-.prog-card-body{padding:1.3rem;flex:1;display:flex;flex-direction:column}
-.prog-card-org{font-size:.75rem;color:var(--muted);margin-bottom:.35rem;font-weight:500}
-.prog-card-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.5rem}
-.prog-card-desc{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;flex:1}
-.prog-pbar-wrap{background:var(--teal-light);border-radius:50px;height:6px;margin-bottom:.7rem;overflow:hidden}
-.prog-pbar{background:linear-gradient(90deg,var(--teal),var(--orange));height:100%;border-radius:50px}
-.prog-card-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1rem}
-.prog-amt{font-weight:700;color:var(--teal);font-size:.9rem}
-.prog-tgt{font-size:.72rem;color:var(--muted)}
-.prog-pct{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:var(--teal)}
-.prog-card-actions{display:flex;gap:.7rem}
+:root {
+    /* Palet Warna Hijau Matcha Terintegrasi */
+    --matcha-dark: #2d4a22;       /* Matcha pekat untuk teks utama & tombol */
+    --matcha-main: #557c43;       /* Matcha standar untuk aksen & progress bar */
+    --matcha-light: #e8eedf;      /* Matcha muda lembut untuk badge & latar kartu gambar */
+    --matcha-soft: #f4f7f0;       /* Latar belakang halaman yang teduh */
+    --ink: #1c2816;               /* Warna teks gelap */
+    --muted: #6b7c65;             /* Warna teks sekunder */
+    --white: #ffffff;
+    --border: #dee5d8;
+    --urgent-red: #d32f2f;        /* Merah kalem khusus untuk penanda darurat */
+}
+
+/* Terapkan font sederhana ke seluruh elemen halaman katalog */
+body, button, input, select, textarea, .filter-btn, .filter-search {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Header Halaman */
+.page-header {
+    padding: 3.5rem 5% 2rem;
+    background: var(--white);
+    text-align: left;
+}
+.page-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0.5rem 0;
+}
+.page-header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0;
+}
+.sec-lbl {
+    color: var(--matcha-main);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Bar Filter & Pencarian */
+.filter-bar {
+    background: var(--matcha-soft);
+    padding: 1.5rem 5%;
+    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+.filter-search {
+    flex: 1;
+    min-width: 200px;
+    padding: .65rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: .88rem;
+    outline: none;
+    transition: all .2s ease;
+    background: var(--white);
+}
+.filter-search:focus {
+    border-color: var(--matcha-main);
+    box-shadow: 0 0 0 3px rgba(85, 124, 67, 0.15);
+}
+.filter-btn {
+    padding: .5rem 1.2rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--muted);
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.filter-btn:hover {
+    background: var(--matcha-light);
+    color: var(--matcha-dark);
+    border-color: var(--matcha-main);
+}
+.filter-btn.active {
+    background: var(--matcha-dark) !important;
+    color: var(--white) !important;
+    border-color: var(--matcha-dark) !important;
+}
+
+/* Grid & Kartu Katalog Program */
+.programs-wrap {
+    padding: 3rem 5%;
+    background: var(--white);
+}
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 2rem;
+}
+.prog-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+.prog-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--matcha-main);
+    box-shadow: 0 12px 24px -10px rgba(85, 124, 67, 0.18);
+}
+.prog-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--matcha-light), rgba(85, 124, 67, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+}
+.badge-cat {
+    position: absolute;
+    top: .9rem;
+    left: .9rem;
+    background: var(--white);
+    color: var(--matcha-dark);
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .3rem .7rem;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.badge-urgent {
+    position: absolute;
+    top: .9rem;
+    right: .9rem;
+    background: var(--urgent-red);
+    color: var(--white);
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .3rem .7rem;
+    border-radius: 50px;
+    letter-spacing: 0.02em;
+}
+.prog-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.prog-card-org {
+    font-size: .75rem;
+    color: var(--muted);
+    margin-bottom: .4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.prog-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: .6rem;
+}
+.prog-card-desc {
+    font-size: .85rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    flex: 1;
+}
+
+/* Progress Bar Matcha */
+.prog-pbar-wrap {
+    background: var(--matcha-light);
+    border-radius: 50px;
+    height: 6px;
+    margin-bottom: .8rem;
+    overflow: hidden;
+}
+.prog-pbar {
+    background: linear-gradient(90deg, var(--matcha-main), var(--matcha-dark));
+    height: 100%;
+    border-radius: 50px;
+}
+.prog-card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+.prog-amt {
+    font-weight: 700;
+    color: var(--matcha-dark);
+    font-size: .95rem;
+}
+.prog-tgt {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+}
+.prog-pct {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--matcha-main);
+}
+
+/* Menyelaraskan Tombol Aksi */
+.prog-card-actions {
+    display: flex;
+    gap: .7rem;
+}
+.prog-card-actions .btn-primary {
+    background: var(--matcha-dark) !important;
+    border-color: var(--matcha-dark) !important;
+    color: var(--white) !important;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+.prog-card-actions .btn-primary:hover {
+    background: var(--matcha-main) !important;
+    border-color: var(--matcha-main) !important;
+}
+.prog-card-actions .btn-outline {
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    color: var(--matcha-dark) !important;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+.prog-card-actions .btn-outline:hover {
+    background: var(--matcha-soft) !important;
+    border-color: var(--matcha-main) !important;
+}
 </style>
 @endsection
 
