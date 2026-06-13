@@ -2,34 +2,266 @@
 @section('title','Mari Berbagi — Bersama Kita Bisa')
 @section('styles')
 <style>
-.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;justify-content:center;padding:4rem 5%;position:relative;overflow:hidden;text-align:center}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(13,110,110,.08) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:700px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal-light);color:var(--teal);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.5rem;animation:fadeUp .5s ease both}
-.hero-title{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.3rem;animation:fadeUp .6s .1s ease both}
-.hero-title .accent{color:var(--teal);font-style:italic}
-.hero-title .warm{color:var(--orange)}
-.hero-desc{color:var(--muted);font-size:1.05rem;line-height:1.8;max-width:520px;margin:0 auto 2.5rem;animation:fadeUp .6s .2s ease both}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
-.hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border);animation:fadeUp .6s .4s ease both}
-.stat-i{text-align:center}
-.stat-n{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--teal);line-height:1;display:block}
-.stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.3rem}
+/* Import Font yang Sederhana, Bersih, dan Mudah Dibaca */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-.strip{background:var(--teal);padding:2rem 5%;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap}
-.strip-i{text-align:center;color:var(--white)}
-.strip-n{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;display:block}
-.strip-l{font-size:.75rem;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
+:root {
+    /* Palet Warna Hijau Matcha */
+    --matcha-dark: #2d4a22;       /* Matcha pekat untuk teks utama & tombol */
+    --matcha-main: #557c43;       /* Matcha standar untuk aksen & strip */
+    --matcha-light: #e8eedf;      /* Matcha muda lembut untuk badge & hover */
+    --matcha-soft: #f4f7f0;       /* Latar belakang halaman yang teduh */
+    --ink: #1c2816;               /* Warna teks gelap */
+    --muted: #6b7c65;             /* Warna teks sekunder */
+    --white: #ffffff;
+    --border: #dee5d8;
+}
 
-.quick-nav{padding:4rem 5%;background:var(--white)}
-.qnav-title{text-align:center;font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;margin-bottom:.5rem}
-.qnav-sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:2.5rem}
-.qnav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;max-width:900px;margin:0 auto}
-.qnav-card{background:var(--sand);border-radius:20px;padding:2rem 1.5rem;text-align:center;text-decoration:none;color:var(--ink);transition:all .25s;border:2px solid transparent}
-.qnav-card:hover{background:var(--teal-light);border-color:var(--teal);transform:translateY(-4px)}
-.qnav-icon{font-size:2.5rem;margin-bottom:.8rem;display:block}
-.qnav-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
-.qnav-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+/* Terapkan font sederhana ke seluruh elemen */
+body, button, input, select, textarea {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.hero {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 5%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--white);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(85, 124, 67, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--matcha-light);
+    color: var(--matcha-dark);
+    padding: .5rem 1.2rem;
+    border-radius: 50px;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .5s ease both;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeUp .6s .1s ease both;
+}
+
+.hero-title .accent {
+    color: var(--matcha-main);
+    font-style: normal;
+}
+
+.hero-title .warm {
+    color: var(--matcha-dark);
+    text-decoration: underline;
+    text-decoration-color: var(--matcha-light);
+    text-underline-offset: 4px;
+}
+
+.hero-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp .6s .2s ease both;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp .6s .3s ease both;
+}
+
+/* Menyelaraskan komponen tombol bootstrap/custom agar senada */
+.hero-btns .btn-primary {
+    background: var(--matcha-dark) !important;
+    border-color: var(--matcha-dark) !important;
+    color: var(--white) !important;
+    padding: .8rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all .2s;
+}
+
+.hero-btns .btn-primary:hover {
+    background: var(--matcha-main) !important;
+    border-color: var(--matcha-main) !important;
+    transform: translateY(-2px);
+}
+
+.hero-btns .btn-outline {
+    background: transparent !important;
+    border: 2px solid var(--matcha-dark) !important;
+    color: var(--matcha-dark) !important;
+    padding: .8rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all .2s;
+}
+
+.hero-btns .btn-outline:hover {
+    background: var(--matcha-light) !important;
+    transform: translateY(-2px);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp .6s .4s ease both;
+}
+
+.stat-i {
+    text-align: center;
+}
+
+.stat-n {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--matcha-dark);
+    line-height: 1;
+    display: block;
+}
+
+.stat-l {
+    font-size: .78rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-top: .5rem;
+}
+
+.strip {
+    background: var(--matcha-main);
+    padding: 2.5rem 5%;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.strip-i {
+    text-align: center;
+    color: var(--white);
+}
+
+.strip-n {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+}
+
+.strip-l {
+    font-size: .78rem;
+    opacity: .9;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.quick-nav {
+    padding: 5rem 5%;
+    background: var(--matcha-soft);
+}
+
+.qnav-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: .5rem;
+}
+
+.qnav-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: .95rem;
+    margin-bottom: 3rem;
+}
+
+.qnav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.qnav-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.qnav-card:hover {
+    background: var(--white);
+    border-color: var(--matcha-main);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px -8px rgba(85, 124, 67, 0.25);
+}
+
+.qnav-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.qnav-card:hover .qnav-icon {
+    transform: scale(1.1);
+}
+
+.qnav-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--matcha-dark);
+    margin-bottom: .5rem;
+}
+
+.qnav-desc {
+    font-size: .85rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
 </style>
 @endsection
 
@@ -101,3 +333,4 @@
 </section>
 
 @endsection
+
