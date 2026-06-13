@@ -12,7 +12,6 @@
         --text-muted: #8C7A6B;         /* Soft Muted Earthy Brown */
         --cream-light: #F4EFE6;        /* Light Cream for Hover & Highlights */
     }
-
     .auth-wrap {
         min-height: calc(100vh - 70px);
         display: flex;
