@@ -2,34 +2,280 @@
 @section('title','Mari Berbagi — Bersama Kita Bisa')
 @section('styles')
 <style>
-.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;justify-content:center;padding:4rem 5%;position:relative;overflow:hidden;text-align:center}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(13,110,110,.08) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:700px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal-light);color:var(--teal);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.5rem;animation:fadeUp .5s ease both}
-.hero-title{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.3rem;animation:fadeUp .6s .1s ease both}
-.hero-title .accent{color:var(--teal);font-style:italic}
-.hero-title .warm{color:var(--orange)}
-.hero-desc{color:var(--muted);font-size:1.05rem;line-height:1.8;max-width:520px;margin:0 auto 2.5rem;animation:fadeUp .6s .2s ease both}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
-.hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border);animation:fadeUp .6s .4s ease both}
-.stat-i{text-align:center}
-.stat-n{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--teal);line-height:1;display:block}
-.stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.3rem}
+    /* Earthy & Minimalist Color Palette Variables */
+    :root {
+        --primary-brown: #5C4033;      /* Deep Warm Brown */
+        --accent-amber: #A0522D;       /* Sienna / Warm Terracotta */
+        --bg-cream: #FAF7F2;           /* Soft Linen/Cream Background */
+        --border-soft: #EAE3D8;        /* Subtle Warm Gray/Brown Border */
+        --text-dark: #2F221A;          /* Very Dark Charcoal Brown */
+        --text-muted: #8C7A6B;         /* Soft Muted Earthy Brown */
+        --cream-light: #F4EFE6;        /* Light Cream for Hover & Cards */
+        --white-pure: #FFFFFF;
+    }
 
-.strip{background:var(--teal);padding:2rem 5%;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap}
-.strip-i{text-align:center;color:var(--white)}
-.strip-n{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;display:block}
-.strip-l{font-size:.75rem;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
+    body {
+        background-color: var(--bg-cream);
+        color: var(--text-dark);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
 
-.quick-nav{padding:4rem 5%;background:var(--white)}
-.qnav-title{text-align:center;font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;margin-bottom:.5rem}
-.qnav-sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:2.5rem}
-.qnav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;max-width:900px;margin:0 auto}
-.qnav-card{background:var(--sand);border-radius:20px;padding:2rem 1.5rem;text-align:center;text-decoration:none;color:var(--ink);transition:all .25s;border:2px solid transparent}
-.qnav-card:hover{background:var(--teal-light);border-color:var(--teal);transform:translateY(-4px)}
-.qnav-icon{font-size:2.5rem;margin-bottom:.8rem;display:block}
-.qnav-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
-.qnav-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+    /* --- HERO SECTION --- */
+    .hero {
+        min-height: calc(100vh - 72px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5rem 5%;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        background-color: var(--bg-cream);
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* Gradasi lembut bernuansa cokelat hangat, bukan lagi teal */
+        background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(92, 64, 51, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .hero-inner {
+        max-width: 750px;
+        margin: 0 auto;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        background: var(--cream-light);
+        color: var(--accent-amber);
+        padding: .5rem 1.2rem;
+        border-radius: 50px;
+        font-size: .78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border-soft);
+        animation: fadeUp .5s ease both;
+    }
+
+    .hero-title {
+        font-family: 'Fraunces', serif;
+        font-size: clamp(2.8rem, 6vw, 4.2rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -.02em;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+        animation: fadeUp .6s .1s ease both;
+    }
+
+    .hero-title .accent {
+        color: var(--primary-brown);
+        font-style: italic;
+    }
+
+    .hero-title .warm {
+        color: var(--accent-amber);
+    }
+
+    .hero-desc {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        line-height: 1.8;
+        max-width: 560px;
+        margin: 0 auto 2.5rem;
+        animation: fadeUp .6s .2s ease both;
+    }
+
+    /* --- BUTTONS --- */
+    .hero-btns {
+        display: flex;
+        gap: 1.2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeUp .6s .3s ease both;
+    }
+
+    .btn-brown-primary {
+        background: var(--primary-brown);
+        color: var(--white-pure);
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        box-shadow: 0 4px 12px rgba(92, 64, 51, 0.15);
+    }
+
+    .btn-brown-primary:hover {
+        background: var(--accent-amber);
+        transform: translateY(-2px);
+    }
+
+    .btn-brown-outline {
+        background: transparent;
+        color: var(--primary-brown);
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        border: 2px solid var(--primary-brown);
+        transition: all 0.2s ease;
+    }
+
+    .btn-brown-outline:hover {
+        background: var(--cream-light);
+        transform: translateY(-2px);
+    }
+
+    /* --- HERO STATS --- */
+    .hero-stats {
+        display: flex;
+        gap: 3rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--border-soft);
+        animation: fadeUp .6s .4s ease both;
+    }
+
+    .stat-i {
+        text-align: center;
+    }
+
+    .stat-n {
+        font-family: 'Fraunces', serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: var(--primary-brown);
+        line-height: 1;
+        display: block;
+    }
+
+    .stat-l {
+        font-size: .75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        margin-top: .5rem;
+        font-weight: 600;
+    }
+
+    /* --- STRIP SECTION --- */
+    .strip {
+        background: linear-gradient(135deg, var(--primary-brown), var(--accent-amber));
+        padding: 2.5rem 5%;
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+        flex-wrap: wrap;
+        box-shadow: inset 0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    .strip-i {
+        text-align: center;
+        color: var(--white-pure);
+    }
+
+    .strip-n {
+        font-family: 'Fraunces', serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        display: block;
+        letter-spacing: -0.01em;
+    }
+
+    .strip-l {
+        font-size: .75rem;
+        opacity: .85;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        font-weight: 500;
+        margin-top: 0.2rem;
+    }
+
+    /* --- QUICK NAVIGATION SECTION --- */
+    .quick-nav {
+        padding: 6rem 5%;
+        background: var(--white-pure);
+    }
+
+    .qnav-title {
+        text-align: center;
+        font-family: 'Fraunces', serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: .6rem;
+        color: var(--text-dark);
+    }
+
+    .qnav-sub {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: .95rem;
+        margin-bottom: 3.5rem;
+    }
+
+    .qnav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .qnav-card {
+        background: var(--bg-cream);
+        border-radius: 24px;
+        padding: 2.5rem 1.8rem;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text-dark);
+        transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid var(--border-soft);
+    }
+
+    .qnav-card:hover {
+        background: var(--white-pure);
+        border-color: var(--accent-amber);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(92, 64, 51, 0.06);
+    }
+
+    .qnav-icon {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .qnav-card:hover .qnav-icon {
+        transform: scale(1.1);
+    }
+
+    .qnav-name {
+        font-family: 'Fraunces', serif;
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin-bottom: .5rem;
+        color: var(--text-dark);
+    }
+
+    .qnav-desc {
+        font-size: .82rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
 </style>
 @endsection
 
@@ -47,8 +293,8 @@
             Mari Berbagi menghubungkan donatur dengan korban bencana secara langsung, transparan, dan terpercaya di seluruh Indonesia.
         </p>
         <div class="hero-btns">
-            <a href="{{ route('donasi.create') }}" class="btn btn-primary">♥ Donasi Sekarang</a>
-            <a href="{{ route('program.index') }}" class="btn btn-outline">Lihat Program</a>
+            <a href="{{ route('donasi.create') }}" class="btn-brown-primary">🤎 Donasi Sekarang</a>
+            <a href="{{ route('program.index') }}" class="btn-brown-outline">Lihat Program</a>
         </div>
         <div class="hero-stats">
             <div class="stat-i"><span class="stat-n">12K+</span><span class="stat-l">Donatur Aktif</span></div>
